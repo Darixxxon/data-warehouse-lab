@@ -1,2 +1,3 @@
-elo 
-zrobilem repo chociaz pewnie sie nie przyda na razie ale spoko by bylo gdzies to trzmac wszystko szczegolnie jak nam sie uda przez przypadek cos fajnego skiminc
+# **elo!** 
+
+zrobiłem repo chociaż pewnie się na razie nie przyda ale spoko byłoby gdzieś to trzymać wszystko szczególnie jak nam się uda przez przypadek coś fajnego skomponować
