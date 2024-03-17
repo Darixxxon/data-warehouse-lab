@@ -35,11 +35,24 @@ with open('output-data/grades.csv', 'w') as csvfile:
     csv_writer = csv.writer(csvfile)
     csv_writer.writerow(['student_id', 'test_id', 'grade', 'percentage', 'attempt'])
     
-    for i in range(1,451):
-        student_id = i
-        for j in range(1,51):
-            test_id = np.random.randint(1, 400) #student nie pisze sobie randomowych testow tylko te ktore sa przypisane do jego kursow
-            percentage = np.random.randint(1, 100)
-            grade= get_grade_for_percentage(percentage)
-            attempt = np.random.choice(options, p=probabilities)    #attempt jest troszke z dupy (ktos moze pisac tylko 2 xd)
-            csv_writer.writerow([student_id, test_id, grade, percentage, attempt])
+    # #rok 2020
+    # for year in range(0, 4):
+    #     for i in range(1 + (year*90),91 + (year*90)):
+    #         student_id = i
+    #         for j in range(201 - (50 + (year*50)), 201 - (year*50)):
+    #             test_id = j
+    #             percentage = np.random.randint(1, 100)
+    #             grade= get_grade_for_percentage(percentage)
+    #             attempt = np.random.choice(options, p=probabilities)    #attempt jest troszke z dupy (ktos moze pisac tylko 1 lub tylko 2 xd)
+    #             csv_writer.writerow([student_id, test_id, grade, percentage, attempt]) 
+                
+     #rok 2021
+    for year in range(0, 4):
+        for i in range(1 + (year*90),91 + (year*90)):
+            student_id = i + 90
+            for j in range(401 - (50 + (year*50)), 401 - (year*50)):
+                test_id = j
+                percentage = np.random.randint(1, 100)
+                grade= get_grade_for_percentage(percentage)
+                attempt = np.random.choice(options, p=probabilities)    #attempt jest troszke z dupy (ktos moze pisac tylko 1 lub tylko 2 xd)
+                csv_writer.writerow([student_id, test_id, grade, percentage, attempt])                 
