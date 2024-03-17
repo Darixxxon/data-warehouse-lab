@@ -134,6 +134,12 @@ name_courses = ["Fun with Colors", "Story Time Adventures", "Creative Arts and C
 
 months = ["September", "October", "November", "December", "January", "February", "March", "April", "May", "June"]
 
+week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+
+start_hour = ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00"]
+
+end_hour = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00"]
+
 if False:
     with open('teachers_csv', 'w', newline='') as file:
         csv_writer = csv.writer(file)
@@ -154,10 +160,10 @@ if False:
 if False:  
     with open('groups_csv', 'w', newline='') as file:
         csv_writer = csv.writer(file)
-        for year in range(2018,2022):
-            for ID_ in range(1, 5):
-                ID = ID_ + (year - 2017) *4
-                name = group_names[ID_]
+        for year in range(2017,2022):
+            for ID_ in range(1, 4):
+                ID = ID_ + (year - 2017) *3
+                name = group_names[ID-1]
                 csv_writer.writerow([ID, name, year, ID])
                 
 if False:
@@ -172,7 +178,8 @@ if False:
             gender = 'woman' if name[-1] == 'a' else 'man'
             address = addresses_students[ID-1]
             contact = str(letters[random.randint(0, len(letters)-1)]) + str(surname) + "@gmail.com"
-            csv_writer.writerow([ID, name, surname, date, gender, address, contact])
+            group = int((ID-1)/30)+1
+            csv_writer.writerow([ID, name, surname, date, gender, address, contact.lower(), group])
             
 if False:
     with open('courses_csv', 'w', newline='') as file:
@@ -183,7 +190,7 @@ if False:
             teacher = ID + 10
             csv_writer.writerow([ID, name, year, teacher])
             
-if True:
+if False:
     with open('tests_csv', 'w', newline='') as file:
         csv_writer = csv.writer(file)
         for ID in range(1, 401):
@@ -191,3 +198,29 @@ if True:
             date += str(' ') + months[(ID-1)%10]
             course = int((ID-1)/10 + 1) if ID <= 200 else int((ID-201)/10 + 1)
             csv_writer.writerow([ID, date, course])
+    
+if True:
+    with open('classes_csv', 'w', newline='') as file:
+        csv_writer = csv.writer(file)
+        #2020
+        for gr_ID in range(1, 13):
+            for day in range(0, 5):
+                for h in range (0,6):
+                    ID = ((gr_ID-1)*30) + day*6 + h +1
+                    start = start_hour[h]
+                    end = end_hour[h]
+                    #co_ID = (((gr_ID-1%3)+1 + int(h/3)) + int((gr_ID-1)/3)*3 + day*2 - 1)%5 +1 + int((gr_ID-1)/3)*4
+                    co_ID = 21 - (((gr_ID-1)%3+1 + int(h/3) + day*2 - 1)%5 +1 + int((gr_ID-1)/3)*5)
+                    day_w = week[day] 
+                    csv_writer.writerow([ID, day_w, start, end, gr_ID, co_ID])
+        #2021        
+        for gr_ID in range(1, 13):
+            for day in range(0, 5):
+                for h in range (0,6):
+                    ID = ((gr_ID-1)*30) + day*6 + h +1
+                    start = start_hour[h]
+                    end = end_hour[h]
+                    #co_ID = (((gr_ID-1%3)+1 + int(h/3)) + int((gr_ID-1)/3)*3 + day*2 - 1)%5 +1 + int((gr_ID-1)/3)*4
+                    co_ID = 21 - (((gr_ID-1)%3+1 + int(h/3) + day*2 - 1)%5 +1 + int((gr_ID-1)/3)*5)
+                    day_w = week[day] 
+                    csv_writer.writerow([ID, day_w, start, end, gr_ID + 3, co_ID])
