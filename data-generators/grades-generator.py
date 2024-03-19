@@ -28,10 +28,10 @@ def get_grade_for_percentage(percentage):
 
 
 options = [1, 2]
-probabilities = [0.85, 0.15]
+probabilities = [0.95, 0.05]
 
 
-with open('output-data/grades.csv', 'w') as csvfile:
+with open('output-data/grades-2020.csv', 'w') as csvfile:
     csv_writer = csv.writer(csvfile)
     # csv_writer.writerow(['student_id', 'test_id', 'grade', 'percentage', 'attempt'])
     
@@ -43,9 +43,16 @@ with open('output-data/grades.csv', 'w') as csvfile:
                 test_id = j
                 percentage = np.random.randint(1, 100)
                 grade= get_grade_for_percentage(percentage)
+                csv_writer.writerow([student_id, test_id, grade, percentage, 1]) 
                 attempt = np.random.choice(options, p=probabilities)
-                csv_writer.writerow([student_id, test_id, grade, percentage, attempt]) 
-                
+                if attempt == 2:
+                    percentage = np.random.randint(1, 100)
+                    grade= get_grade_for_percentage(percentage)
+                    csv_writer.writerow([student_id, test_id, grade, percentage, 2])     
+            
+            
+with open('output-data/grades-2021.csv', 'w') as csvfile:
+    csv_writer = csv.writer(csvfile)    
      #rok 2021
     for year in range(0, 4):
         for i in range(1 + (year*90),91 + (year*90)):
@@ -54,5 +61,10 @@ with open('output-data/grades.csv', 'w') as csvfile:
                 test_id = j
                 percentage = np.random.randint(1, 100)
                 grade= get_grade_for_percentage(percentage)
+                csv_writer.writerow([student_id, test_id, grade, percentage, 1])               
                 attempt = np.random.choice(options, p=probabilities)
-                csv_writer.writerow([student_id, test_id, grade, percentage, attempt])                 
+                if attempt == 2:
+                    percentage = np.random.randint(1, 100)
+                    grade= get_grade_for_percentage(percentage)
+                    csv_writer.writerow([student_id, test_id, grade, percentage, 2])            
+                    
