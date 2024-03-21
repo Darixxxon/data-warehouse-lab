@@ -28,7 +28,7 @@ def get_grade_for_percentage(percentage):
 
 
 options = [1, 2]
-probabilities = [0.95, 0.05]
+probabilities = [0.9, 0.1]
 
 
 grade_id = 1
@@ -44,13 +44,15 @@ with open('output-data/grades-2020.csv', 'w') as csvfile:
                 test_id = j
                 percentage = np.random.randint(1, 100)
                 grade= get_grade_for_percentage(percentage)
-                csv_writer.writerow([grade_id, student_id, test_id, grade, percentage, 1])
+                writing_time = np.random.randint(65,100)
+                csv_writer.writerow([grade_id, student_id, test_id, grade, percentage, writing_time, 1])
                 grade_id+=1 
                 attempt = np.random.choice(options, p=probabilities)
-                if attempt == 2:
-                    percentage = np.random.randint(1, 100)
+                if attempt == 2 and percentage < 60:
+                    percentage = np.random.randint(30, 100)
                     grade= get_grade_for_percentage(percentage)
-                    csv_writer.writerow([grade_id, student_id, test_id, grade, percentage, 2])     
+                    writing_time = np.random.randint(70,100)
+                    csv_writer.writerow([grade_id, student_id, test_id, grade, percentage, writing_time, 2])     
                     grade_id+=1
             
             
@@ -64,12 +66,14 @@ with open('output-data/grades-2021.csv', 'w') as csvfile:
                 test_id = j
                 percentage = np.random.randint(1, 100)
                 grade= get_grade_for_percentage(percentage)
-                csv_writer.writerow([grade_id, student_id, test_id, grade, percentage, 1])
+                writing_time = np.random.randint(70,100)
+                csv_writer.writerow([grade_id, student_id, test_id, grade, percentage, writing_time, 1])
                 grade_id+=1               
                 attempt = np.random.choice(options, p=probabilities)
-                if attempt == 2:
-                    percentage = np.random.randint(1, 100)
+                if attempt == 2 and percentage < 60:
+                    percentage = np.random.randint(30, 100)
                     grade= get_grade_for_percentage(percentage)
-                    csv_writer.writerow([grade_id, student_id, test_id, grade, percentage, 2])      
+                    writing_time = np.random.randint(80,100)
+                    csv_writer.writerow([grade_id, student_id, test_id, grade, percentage, writing_time, 2])      
                     grade_id+=1      
                     
