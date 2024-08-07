@@ -1,0 +1,7 @@
+WITH
+MEMBER [Measures].[AverageAttendance] AS
+	'([Measures].[Sum of presences] -[Measures].[F Presence Count]) / [Measures].[F Presence Count]'
+ SELECT 
+{ [Measures].[AverageAttendance] } ON COLUMNS, 
+{ ([Dim Groups].[Starting Year].[Starting Year].ALLMEMBERS * [Dim Groups].[Group Name].[Group Name].ALLMEMBERS ) }ON ROWS 
+FROM [DW]

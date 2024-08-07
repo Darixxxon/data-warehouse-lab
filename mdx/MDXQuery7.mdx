@@ -1,0 +1,14 @@
+WITH 
+MEMBER [Measures].[PrevMonthAvg] AS
+ '(PARALLELPERIOD([Dim Date].[Hierarchy].[Month], 1, [Dim Date].[Hierarchy].CurrentMember), [Measures].[AverageAttendance])'
+MEMBER [Measures].[AverageAttendance] AS
+	'([Measures].[Sum of presences] -[Measures].[F Presence Count]) / [Measures].[F Presence Count]'
+MEMBER [Measures].[DiffAvg] AS
+'[Measures].[AverageAttendance] - [Measures].[PrevMonthAvg]'
+SELECT 
+	FILTER(
+        [Dim Groups].[Group ID].Members*[Dim Date].[Hierarchy].[Month].Members,
+        [Measures].[DiffAvg] < 0 AND [Measures].[Average_percentage_of_points]<>(null))
+		ON ROWS,
+	{[Measures].[AverageAttendance], [Measures].[PrevMonthAvg], [Measures].[DiffAvg]} ON COLUMNS
+FROM [DW];

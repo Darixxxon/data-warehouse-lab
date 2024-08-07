@@ -1,0 +1,11 @@
+WITH
+MEMBER [Measures].[AverageAttendance] AS
+    '([Measures].[Sum of presences] - [Measures].[F Presence Count]) / [Measures].[F Presence Count]'
+
+SELECT
+        {topcount(ORDER([Dim Students].[s ID].[s ID].Members,
+        [Measures].[AverageAttendance],
+        BASC),3)}
+     ON ROWS,
+    {[Measures].[AverageAttendance]} ON COLUMNS
+FROM [DW]

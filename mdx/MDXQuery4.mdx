@@ -1,0 +1,7 @@
+WITH
+MEMBER [Measures].[AveragePoints] AS
+	'[Measures].[Average_percentage_of_points] / 30'
+ SELECT 
+{ [Measures].[AveragePoints] } ON COLUMNS, 
+{ ([Dim Groups].[Starting Year].[Starting Year].ALLMEMBERS * [Dim Groups].[Group Name].[Group Name].ALLMEMBERS ) }ON ROWS 
+FROM [DW]

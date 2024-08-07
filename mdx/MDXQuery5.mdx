@@ -1,0 +1,8 @@
+SELECT
+	FILTER(
+		{[Dim Date].[Hierarchy].[Month].Members * ORDER([Dim Students].[s ID].[s ID].Members,
+        [Measures].[Average_percentage_of_points],
+        BDESC)},  [Measures].[Average_percentage_of_points]<> (null))
+     ON ROWS,
+    {[Measures].[Average_percentage_of_points]} ON COLUMNS
+FROM [DW]

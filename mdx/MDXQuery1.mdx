@@ -1,0 +1,12 @@
+WITH 
+MEMBER [Measures].[PrevMonthAvg] AS
+ '(PARALLELPERIOD([Dim Date].[Hierarchy].[Month], 1, [Dim Date].[Hierarchy].CurrentMember), [Measures].[Average_percentage_of_points])'
+MEMBER [Measures].[DiffAvg] AS
+'[Measures].[Average_percentage_of_points] - [Measures].[PrevMonthAvg]'
+SELECT 
+	FILTER(
+        [Dim Courses].[Course ID].[Course ID].Members*[Dim Date].[Hierarchy].[Month].Members,
+        [Measures].[DiffAvg] < 0 AND [Measures].[Average_percentage_of_points]<>(null))
+		ON ROWS,
+	{[Measures].[Average_percentage_of_points], [Measures].[PrevMonthAvg], [Measures].[DiffAvg]} ON COLUMNS
+FROM [DW];

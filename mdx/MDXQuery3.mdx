@@ -1,0 +1,9 @@
+SELECT 
+	ORDER(
+		FILTER(
+			{[Dim Groups].[Starting Year].[Starting Year].Members*[Dim Students].[s ID].[s ID].Members},
+			[Measures].[Average_grade]<> (null)),
+		[Measures].[Average_grade], BDESC) 
+	ON ROWS,
+	{[Measures].[Average_grade]} ON COLUMNS
+FROM [DW]
